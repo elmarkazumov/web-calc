@@ -8,16 +8,56 @@
 <body>
     
     <main class="main">
-        <section class="calculator">
-            <div>
+        <section class="main__calculator">
+            <div class="main__display">
+                <input class="display" type="text">
+            </div>
+
+            <div class="main__cont">
+                <div class="main__left">
+                    <div class="main__btn_block">
+                        <input class="main__button" type="button" value="C">
+                        <input class="main__button" type="button" value="C">
+                    </div>
+        
+                    <div class="main__btn_block">
+                        <input class="main__button" type="button" value="7">
+                        <input class="main__button" type="button" value="8">
+                        <input class="main__button" type="button" value="9">
+                    </div>
+        
+                    <div class="main__btn_block">
+                        <input class="main__button" type="button" value="4">
+                        <input class="main__button" type="button" value="5">
+                        <input class="main__button" type="button" value="6">
+                    </div>
+        
+                    <div class="main__btn_block">
+                        <input class="main__button" type="button" value="1">
+                        <input class="main__button" type="button" value="2">
+                        <input class="main__button" type="button" value="3">
+                    </div>
+
+                    <div class="main__btn_block">
+                        <input class="main__button" type="button" value="0">
+                        <input class="main__button" type="button" value=".">
+                    </div>                    
+                </div>
                 
+                <div class="main__right">
+                    <div class="main__btn_block main__btn_right">
+                        <input class="main__button" type="button" value="*">
+                        <input class="main__button" type="button" value="/">
+                        <input class="main__button" type="button" value="+">
+                        <input class="main__button" type="button" value="-">
+                        <input class="main__button" type="button" value="=">
+                    </div>
+                </div>
+    
             </div>
-
-            <div>
-
-            </div>
-        </div>
+        </section>
     </main>
+    
     <script src="js/calc.js"></script>
 </body>
 </html>
