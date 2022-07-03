@@ -1,15 +1,3 @@
-// function timeshow(){
-//     let date;
-//     let time = document.querySelector('.time');
-
-//     setInterval(() => {
-//         date = new Date().toLocaleTimeString();
-//         time.innerHTML = date;    
-//     }, 1000);
-// }
-
-// timeshow();
-
 
 // function setclass(yourclass){
 //     let btn = document.querySelectorAll('div.main__btn_block > input');
@@ -21,28 +9,50 @@
 // setclass();
 
 let btn = document.querySelectorAll('.main__button'),
-    result = [], 
+    result = [], symbol,
     disp = document.querySelector('.display');
 
-function calc(firstnum, secondnum, array,sym){
-    let sumright = [], sumleft = [];
+function calc(array, sym){
+    // массивы для чисел находящиеся в зависимости от знака операции
+    let right = [], left = [];
 
+    // поиск индекса знака оператора
     let symfind = array.indexOf(sym);
 
+    // запись чисел находящиеся слева от знака в массив
     for(let i = 0; i < symfind; i++){
-        sumleft.push(result[i]);
+        left.push(array[i]);
     }
 
-    let leftnum = sumleft.join("");
+    // "соединяем" цифры в одно число
+    let leftnum = left.join("");
 
-    for(let i = symfind + 1; i < result.length; i++){
-        sumright.push(result[i]);
+    // запись чисел находящиеся справа от знака в массив
+    for(let i = symfind + 1; i < array.length; i++){
+        right.push(array[i]);
     }
 
-    let rightnum = sumright.join("");
+    let rightnum = right.join("");
 
-    disp.value += Number(leftnum) + Number(rightnum);
+    switch (sym) {
+        case sym = "+":
+            disp.value += Number(leftnum) + Number(rightnum);            
+            break;
+
+        case sym = "-":
+            disp.value += Number(leftnum) - Number(rightnum);            
+            break;
+
+        case sym = "*":
+            disp.value += Number(leftnum) * Number(rightnum);            
+            break;
+
+        case sym = "/":
+            disp.value += Number(leftnum) / Number(rightnum);            
+            break;
+    }
 }
+
 
 btn.forEach(elem => {
     elem.addEventListener('click', function() {
@@ -58,45 +68,16 @@ btn.forEach(elem => {
         }
         
         
-        if(this.value == "+"){
+        if(this.value == "+" || this.value == "-" || this.value == "/" || this.value == "*"){
             result.push(this.value);
-            disp.value += "+";
+            symbol = this.value;
+            disp.value += this.value;
         }
 
         if(this.value == "="){
             disp.value += "=";
-            let symfind = result.indexOf('+');
-
-            for(let i = 0; i < symfind; i++){
-                sumleft.push(result[i]);
-            }
-        
-            let leftnum = sumleft.join("");
-
-            for(let i = symfind + 1; i < result.length; i++){
-                sumright.push(result[i]);
-            }
-
-            let rightnum = sumright.join("");
-
-            disp.value += Number(leftnum) + Number(rightnum);
+            calc(result, symbol);
         }
 
     })
   });
-
-
-          // switch(this.value) {
-        //     case "C":
-        //         disp.value = '';
-        //         break;
-
-        //     case '1', '4':
-        //         first = this.value;
-        //         disp.value += first;
-        //         break;
-                
-        //     default:
-        //         alert(0);
-        //         break;
-        // }
