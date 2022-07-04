@@ -15,7 +15,8 @@ let btn = document.querySelectorAll('.main__button'),
 function calc(array, sym){
     // массивы для чисел находящиеся в зависимости от знака операции
     let right = [], left = [];
-
+    console.log(right);
+    console.log(left);
     // поиск индекса знака оператора
     let symfind = array.indexOf(sym);
 
@@ -26,14 +27,14 @@ function calc(array, sym){
 
     // "соединяем" цифры в одно число
     let leftnum = left.join("");
-
+    console.log(leftnum);
     // запись чисел находящиеся справа от знака в массив
     for(let i = symfind + 1; i < array.length; i++){
         right.push(array[i]);
     }
 
     let rightnum = right.join("");
-
+    console.log(rightnum);
     switch (sym) {
         case sym = "+":
             disp.value += Number(leftnum) + Number(rightnum);            
@@ -62,11 +63,15 @@ btn.forEach(elem => {
             result = [""];
         }
 
-        if(!isNaN(this.value)){
+        // if(!isNaN(this.value)){
+        //     result.push(this.value);
+        //     disp.value += this.value;
+        // }
+        
+        if(this.value == Number(this.value) || this.value == "."){
             result.push(this.value);
             disp.value += this.value;
         }
-        
         
         if(this.value == "+" || this.value == "-" || this.value == "/" || this.value == "*"){
             result.push(this.value);
@@ -75,7 +80,7 @@ btn.forEach(elem => {
         }
 
         if(this.value == "="){
-            disp.value += "=";
+            disp.value += this.value;
             calc(result, symbol);
         }
 
