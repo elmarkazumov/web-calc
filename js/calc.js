@@ -9,15 +9,14 @@
 // setclass();
 
 let btn = document.querySelectorAll('.main__button'),
-    result = [], symbol,
+    result = [], symbol, sum,
     disp = document.querySelector('.display');
 
 function calc(array, sym){
     // массивы для чисел находящиеся в зависимости от знака операции
     let right = [], left = [];
-    console.log(right);
-    console.log(left);
-    // поиск индекса знака оператора
+
+    // поиск индекса знака
     let symfind = array.indexOf(sym);
 
     // запись чисел находящиеся слева от знака в массив
@@ -25,33 +24,36 @@ function calc(array, sym){
         left.push(array[i]);
     }
 
-    // "соединяем" цифры в одно число
+    // "соединяем" цифры в одно число, если число 2-х и более значное
     let leftnum = left.join("");
-    console.log(leftnum);
+
     // запись чисел находящиеся справа от знака в массив
     for(let i = symfind + 1; i < array.length; i++){
         right.push(array[i]);
     }
 
     let rightnum = right.join("");
-    console.log(rightnum);
+
     switch (sym) {
         case sym = "+":
-            disp.value += Number(leftnum) + Number(rightnum);            
+            disp.value += sum = Number(leftnum) + Number(rightnum);            
             break;
 
         case sym = "-":
-            disp.value += Number(leftnum) - Number(rightnum);            
+            disp.value += sum = Number(leftnum) - Number(rightnum);            
             break;
 
         case sym = "*":
-            disp.value += Number(leftnum) * Number(rightnum);            
+            disp.value += sum = Number(leftnum) * Number(rightnum);            
             break;
 
         case sym = "/":
-            disp.value += Number(leftnum) / Number(rightnum);            
+            disp.value += sum = Number(leftnum) / Number(rightnum);            
             break;
     }
+
+    result = [""];
+    result.push(sum);
 }
 
 
@@ -62,13 +64,8 @@ btn.forEach(elem => {
             disp.value = "";
             result = [""];
         }
-
-        // if(!isNaN(this.value)){
-        //     result.push(this.value);
-        //     disp.value += this.value;
-        // }
         
-        if(this.value == Number(this.value) || this.value == "."){
+        if(!isNaN(this.value) || this.value == "."){
             result.push(this.value);
             disp.value += this.value;
         }
