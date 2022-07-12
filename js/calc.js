@@ -1,61 +1,80 @@
 
-// function setclass(yourclass){
-//     let btn = document.querySelectorAll('div.main__btn_block > input');
-//     for (btn of btn){
-//         btn.setAttribute("class", 'main__button');
+let btn = document.querySelectorAll('.main__button'), result = [], sum, disp = document.querySelector('.display');
+
+// function calc(array, sym){
+
+//     let right = [], left = [];
+
+//     let symfind = array.indexOf(sym);
+
+//     for(let i = 0; i < symfind; i++){
+//         left.push(array[i]);
 //     }
+
+//     let leftnum = left.join("");
+
+//     for(let i = symfind + 1; i < array.length; i++){
+//         right.push(array[i]);
+//     }
+
+//     let rightnum = right.join("");
+
+//     switch (sym) {
+//         case sym = "+":
+//             disp.value += sum = Number(leftnum) + Number(rightnum);            
+//             break;
+
+//         case sym = "-":
+//             disp.value += sum = Number(leftnum) - Number(rightnum);            
+//             break;
+
+//         case sym = "*":
+//             disp.value += sum = Number(leftnum) * Number(rightnum);            
+//             break;
+
+//         case sym = "/":
+//             disp.value += sum = Number(leftnum) / Number(rightnum);            
+//             break;
+//     }
+
+//     result = [""];
+//     result.push(sum);
 // }
 
-// setclass();
+function calc(){
+    let resultJoin = result.join(""),
+        resultClear = resultJoin.split(/(\+|\-|\*|\/)/),
+        symbolId = (Array.from(resultClear.entries()).filter(i => i[1] == "/" || i[1] == "+" || i[1] == "-" || i[1] == "*")).map(i => i[0]);
 
-let btn = document.querySelectorAll('.main__button'),
-    result = [], symbol, sum,
-    disp = document.querySelector('.display');
+    for(let i = 0; i < symbolId.length; i++){
 
-function calc(array, sym){
-    // массивы для чисел находящиеся в зависимости от знака операции
-    let right = [], left = [];
+        if(resultClear[symbolId[i]] == "+" && symbolId[i] == 1){
+            sum = parseFloat(resultClear[symbolId[i] - 1]) + parseFloat(resultClear[symbolId[i] + 1]);
+        } else if(resultClear[symbolId[i]] == "+"){
+            sum += parseFloat(resultClear[symbolId[i] + 1]);
+        }
 
-    // поиск индекса знака
-    let symfind = array.indexOf(sym);
+        if(resultClear[symbolId[i]] == "-" && symbolId[i] == 1){
+            sum = parseFloat(resultClear[symbolId[i] - 1]) - parseFloat(resultClear[symbolId[i] + 1]);
+        } else if(resultClear[symbolId[i]] == "-"){
+            sum -= parseFloat(resultClear[symbolId[i] + 1]);
+        }
 
-    // запись чисел находящиеся слева от знака в массив
-    for(let i = 0; i < symfind; i++){
-        left.push(array[i]);
+        if(resultClear[symbolId[i]] == "*" && symbolId[i] == 1){
+            sum = parseFloat(resultClear[symbolId[i] - 1]) * parseFloat(resultClear[symbolId[i] + 1]);
+        } else if(resultClear[symbolId[i]] == "*"){
+            sum *= parseFloat(resultClear[symbolId[i] + 1]);
+        }
+
+        if(resultClear[symbolId[i]] == "/" && symbolId[i] == 1){
+            sum = parseFloat(resultClear[symbolId[i] - 1]) / parseFloat(resultClear[symbolId[i] + 1]);
+        } else if(resultClear[symbolId[i]] == "/"){
+            sum /= parseFloat(resultClear[symbolId[i] + 1]);
+        }
     }
 
-    // "соединяем" цифры в одно число, если число 2-х и более значное
-    let leftnum = left.join("");
-
-    // запись чисел находящиеся справа от знака в массив
-    for(let i = symfind + 1; i < array.length; i++){
-        right.push(array[i]);
-    }
-
-    let rightnum = right.join("");
-
-    switch (sym) {
-        case sym = "+":
-            disp.value += sum = Number(leftnum) + Number(rightnum);            
-            break;
-
-        case sym = "-":
-            disp.value += sum = Number(leftnum) - Number(rightnum);            
-            break;
-
-        case sym = "*":
-            disp.value += sum = Number(leftnum) * Number(rightnum);            
-            break;
-
-        case sym = "/":
-            disp.value += sum = Number(leftnum) / Number(rightnum);            
-            break;
-    }
-
-    result = [""];
-    result.push(sum);
+    disp.value += sum;
 }
-
 
 btn.forEach(elem => {
     elem.addEventListener('click', function() {
@@ -78,8 +97,10 @@ btn.forEach(elem => {
 
         if(this.value == "="){
             disp.value += this.value;
-            calc(result, symbol);
+            calc();
         }
 
     })
   });
+
+
