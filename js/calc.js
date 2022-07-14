@@ -1,46 +1,6 @@
 
 let btn = document.querySelectorAll('.main__button'), result = [], sum, disp = document.querySelector('.display');
 
-// function calc(array, sym){
-
-//     let right = [], left = [];
-
-//     let symfind = array.indexOf(sym);
-
-//     for(let i = 0; i < symfind; i++){
-//         left.push(array[i]);
-//     }
-
-//     let leftnum = left.join("");
-
-//     for(let i = symfind + 1; i < array.length; i++){
-//         right.push(array[i]);
-//     }
-
-//     let rightnum = right.join("");
-
-//     switch (sym) {
-//         case sym = "+":
-//             disp.value += sum = Number(leftnum) + Number(rightnum);            
-//             break;
-
-//         case sym = "-":
-//             disp.value += sum = Number(leftnum) - Number(rightnum);            
-//             break;
-
-//         case sym = "*":
-//             disp.value += sum = Number(leftnum) * Number(rightnum);            
-//             break;
-
-//         case sym = "/":
-//             disp.value += sum = Number(leftnum) / Number(rightnum);            
-//             break;
-//     }
-
-//     result = [""];
-//     result.push(sum);
-// }
-
 function calc(){
     let resultJoin = result.join(""),
         resultClear = resultJoin.split(/(\+|\-|\*|\/)/),
@@ -90,9 +50,16 @@ btn.forEach(elem => {
         }
         
         if(this.value == "+" || this.value == "-" || this.value == "/" || this.value == "*"){
-            result.push(this.value);
-            symbol = this.value;
-            disp.value += this.value;
+            let symb = this.value;
+
+            let lastLetter = result.slice(-1);
+
+            if (symb == lastLetter){
+                console.log(0);
+            } else{
+                result.push(symb);
+                disp.value += symb;
+            }
         }
 
         if(this.value == "="){
